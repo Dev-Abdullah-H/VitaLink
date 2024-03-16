@@ -1,13 +1,13 @@
 <template>
   <div
-    class="container flex flex-col mx-auto justify-center items-center py-8 px-4 lg:px-0 relative"
+    class="container flex flex-col mx-auto justify-center items-center py-8 px-4 lg:px-0"
   >
     <div class="banner mb-8 lg:mb-0 lg:mr-8">
       <img src="../assets/VitaLink.png" alt="VitaLink" class="vitalink" />
     </div>
     <div class="detail bg-white rounded-lg shadow-lg p-8 lg:p-10">
       <h1 class="text-2xl lg:text-3xl font-thin text-center mb-6">
-        Create an Account
+        Login to Your Account
       </h1>
       <form class="w-full max-w-md">
         <div class="mb-6">
@@ -33,13 +33,13 @@
           />
         </div>
         <div class="flex justify-center">
-          <button class="btn">Sign Up</button>
+          <button class="btn">Login</button>
         </div>
       </form>
       <p class="text-gray-600 text-center mt-4">
-        Already have an account?
-        <RouterLink to="/login" class="text-blue-500 hover:underline"
-          >Sign in here</RouterLink
+        Don't have an account yet?
+        <RouterLink to="/signup" class="text-blue-500 hover:underline"
+          >Sign up here</RouterLink
         >
       </p>
     </div>
@@ -61,7 +61,7 @@
 .vitalink {
   width: 100%;
   height: 300px;
-  max-width: 300px;
+  max-width: 300px; 
 }
 .input-field {
   appearance: none;
