@@ -108,6 +108,11 @@ export default {
   max-width: 400px;
   }
 }
+@media (min-width: 600px) {
+  .container {
+    max-width: 540px;
+  }
+}
 @media (min-width: 640px) {
   .container {
     max-width: 640px;
