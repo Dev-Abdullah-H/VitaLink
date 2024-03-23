@@ -18,13 +18,13 @@ const router = createRouter({
     {
       path: "/home",
       name: "home",
-      component: () => {"../views/Home.vue"},
-      meta: { requireAuth: true }
+      component: () => import("../views/Home.vue"),
+      meta: { requireAuth: true },
     },
     {
-      path: "/:catchAll(.*)",
-      redirect: "/login"
-    }
+      path: "/",
+      redirect: "/login",
+    },
   ],
 });
 

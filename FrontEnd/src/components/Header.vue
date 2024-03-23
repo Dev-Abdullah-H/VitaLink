@@ -1,136 +1,126 @@
 <template>
-  <div
-    class="container mx-auto px-4 lg:px-8 flex items-center justify-between border border-gray-200 m-2 shadow-lg rounded-xl"
-  >
-    <h1
-      class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-500 cursor-pointer p-4"
-    >
-      VitaLink
-    </h1>
-    <nav class="hidden sm:block"> 
-      <ul class="flex">
-        <li class="m-2">
-          <router-link
-            class="text-gray-700 hover:text-blue-500 transition duration-300 ease-in-out"
-            to="/"
-            >Home</router-link
-          >
-        </li>
-        <li class="m-2">
-          <router-link
-            class="text-gray-700 hover:text-blue-500 transition duration-300 ease-in-out"
-            to="/"
-            >Tests</router-link
-          >
-        </li>
-        <li class="m-2">
-          <router-link
-            class="text-gray-700 hover:text-blue-500 transition duration-300 ease-in-out"
-            to="/"
-            >Appointment</router-link
-          >
-        </li>
-      </ul>
-    </nav>
-    <button
-      class="sm:hidden text-gray-700 hover:text-blue-500 transition duration-300 ease-in-out focus:outline-none"
-      @click="toggleMenu"
-    >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
+  <div class="header">
+    <div class="header-container flex items-center justify-between px-4">
+      <div class="logo">
+        <router-link to="/" class="text-xl font-bold text-white"
+          >VitaLink</router-link
+        >
+      </div>
+      <nav class="hidden sm:flex space-x-4">
+        <router-link
+          to="/"
+          class="text-gray-200 hover:text-blue-500 transition duration-300 ease-in-out"
+          >Home</router-link
+        >
+        <router-link
+          to="/"
+          class="text-gray-200 hover:text-blue-500 transition duration-300 ease-in-out"
+          >Tests</router-link
+        >
+        <router-link
+          to="/"
+          class="text-gray-200 hover:text-blue-500 transition duration-300 ease-in-out"
+          >Appointment</router-link
+        >
+      </nav>
+      <button
+        v-if="isHamburgerVisible"
+        class="hamburger sm:hidden focus:outline-none"
+        @click="toggleMenu"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16m-7 6h7"
-        ></path> 
-       </svg>
-    </button>
+        <svg
+          class="w-6 h-6 text-white"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          ></path>
+        </svg>
+      </button>
+    </div>
     <div
       v-if="isMenuOpen"
-      class="sm:hidden absolute top-0 left-0 w-full h-full bg-white z-50"
+      class="mobile-menu absolute top-full left-0 w-full bg-gray-800 z-50"
     >
-      <ul class="flex flex-col items-center justify-center h-full">
-        <li class="m-4">
-          <router-link
-            class="text-gray-700 hover:text-blue-500 transition duration-300 ease-in-out"
-            to="/"
-            >Home</router-link
-          >
-        </li>
-        <li class="m-4">
-          <router-link
-            class="text-gray-700 hover:text-blue-500 transition duration-300 ease-in-out"
-            to="/"
-            >Tests</router-link
-          >
-        </li>
-        <li class="m-4">
-          <router-link
-            class="text-gray-700 hover:text-blue-500 transition duration-300 ease-in-out"
-            to="/"
-            >Appointment</router-link
-          >
-        </li>
+      <ul
+        class="flex flex-col items-center justify-center py-8 space-y-4 text-white"
+      >
+        <li><router-link to="/" class="text-xl">Home</router-link></li>
+        <li><router-link to="/" class="text-xl">Tests</router-link></li>
+        <li><router-link to="/" class="text-xl">Appointment</router-link></li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isMenuOpen: false,
-    };
-  },
-  methods: {
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-  },
+<script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
+const isMenuOpen = ref(false);
+const isHamburgerVisible = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
 };
+
+const checkWindowWidth = () => {
+  isHamburgerVisible.value = window.innerWidth < 620;
+};
+
+onMounted(() => {
+  checkWindowWidth();
+  window.addEventListener("resize", checkWindowWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", checkWindowWidth);
+});
 </script>
 
 <style>
-@media (min-width : 375px) {
-  .container {
-  max-width: 350px;
-  }
+.header {
+  background-color: #171a29;
+  padding: 1rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-@media (min-width : 400px) {
-  .container {
-  max-width: 400px;
-  }
+
+.header-container {
+  max-width: 1024px;
+  margin: 0 auto;
 }
-@media (min-width: 600px) {
-  .container {
-    max-width: 540px;
-  }
+
+.logo {
+  color: inherit;
 }
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
+
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #171a29;
+  z-index: 100;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(-100%);
 }
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
+
+.mobile-menu.open {
+  transform: translateY(0);
 }
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
+
+.hamburger {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 </style>

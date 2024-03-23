@@ -9,12 +9,13 @@
       <h1 class="text-2xl lg:text-3xl font-thin text-center mb-6">
         Create an Account
       </h1>
-      <form class="w-full max-w-md">
+      <div class="w-full max-w-md">
         <div class="mb-6">
           <label for="email" class="block text-gray-700 font-bold mb-2"
             >Email Address:</label
           >
           <input
+            v-model="SignUpData.email"
             id="email"
             type="email"
             class="input-field"
@@ -26,6 +27,7 @@
             >Password:</label
           >
           <input
+            v-model="SignUpData.password"
             id="password"
             type="password"
             class="input-field"
@@ -33,9 +35,9 @@
           />
         </div>
         <div class="flex justify-center">
-          <button class="btn">Sign Up</button>
+          <button type="button" @click="SignUp" class="btn">Sign Up</button>
         </div>
-      </form>
+      </div>
       <p class="text-gray-600 text-center mt-4">
         Already have an account?
         <RouterLink to="/login" class="text-blue-500 hover:underline"
@@ -46,7 +48,34 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+
+const router = useRouter();
+
+const SignUpData = reactive({
+  email: "",
+  password: "",
+});
+
+const SignUp = async () => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/user/signup",
+      SignUpData
+    );
+    console.log(response.data);
+    if (response.data.success) {
+      SignUpData.email = "";
+      SignUpData.password = "";
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+</script>
 
 <style scoped>
 .container {

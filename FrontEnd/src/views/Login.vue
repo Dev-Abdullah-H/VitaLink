@@ -9,12 +9,13 @@
       <h1 class="text-2xl lg:text-3xl font-thin text-center mb-6">
         Login to Your Account
       </h1>
-      <form class="w-full max-w-md">
+      <div class="w-full max-w-md">
         <div class="mb-6">
           <label for="email" class="block text-gray-700 font-bold mb-2"
             >Email Address:</label
           >
           <input
+            v-model="loginData.email"
             id="email"
             type="email"
             class="input-field"
@@ -26,6 +27,7 @@
             >Password:</label
           >
           <input
+            v-model="loginData.password"
             id="password"
             type="password"
             class="input-field"
@@ -33,9 +35,9 @@
           />
         </div>
         <div class="flex justify-center">
-          <button class="btn">Login</button>
+          <button type="button" class="btn" @click="login">Login</button>
         </div>
-      </form>
+      </div>
       <p class="text-gray-600 text-center mt-4">
         Don't have an account yet?
         <RouterLink to="/signup" class="text-blue-500 hover:underline"
@@ -46,7 +48,26 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import axios from 'axios';
+import { reactive } from 'vue';
+
+const loginData = reactive({
+  email: '',
+  password: ''
+})
+
+const login = async() => {
+  try {
+    const response = await axios.post('http://localhost:3000/user/login', loginData)
+    console.log(response.data);
+  }catch(e) {
+    console.log(e);
+  }
+}
+
+
+</script>
 
 <style scoped>
 .container {
