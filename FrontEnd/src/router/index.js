@@ -22,6 +22,16 @@ const router = createRouter({
       meta: { requireAuth: true },
     },
     {
+      path: "/home/:id",
+      name: "section",
+      component: () => import('../views/Section.vue')
+    },
+    {
+      path: '/signup/user-info',
+      name: "userinfo",
+      component: () => import('../views/UserInfo.vue')
+    },
+    {
       path: "/",
       redirect: "/login",
     },

@@ -3,7 +3,7 @@
     <Header class="mb-10"/>
     <div class="container mx-auto px-4 py-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6">
-        <div class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
+        <div @click="redirect('heart')" class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
           <img src="../assets/heart.png" alt="Heart Rate" class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2" />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">Heart Rate</h2>
@@ -13,7 +13,7 @@
             <button class="btn btn-primary mt-2">View Details</button>
           </div>
         </div>
-        <div class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
+        <div @click="redirect('urine-section')" class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
           <img src="../assets/bladder.png" alt="Urine Output" class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2" />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">Urine Output</h2>
@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-        <div class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
+        <div @click="redirect('blood')" class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
           <img src="../assets/blood.png" alt="Blood Sugar" class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2" />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">Blood Sugar</h2>
@@ -35,7 +35,7 @@
             <button class="btn btn-primary mt-2">View Details</button>
           </div>
         </div>
-        <div class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
+        <div @click="redirect('bmi')" class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
           <img src="../assets/bmi.png" alt="BMI" class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2" />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">BMI</h2>
@@ -52,6 +52,15 @@
 
 <script setup>
 import Header from '@/components/Header.vue';
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const redirect = (path) => {
+  router.push(`/home/${path}`)
+}
+
+
 </script>
 
 <style scoped>
