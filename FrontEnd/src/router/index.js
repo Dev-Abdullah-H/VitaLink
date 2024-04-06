@@ -47,6 +47,11 @@ const router = createRouter({
       component: () => import('../views/UserInfo.vue')
     },
     {
+      path: '/home/heart-detail',
+      name: "heart-detail",
+      component: () => import('../views/Detail/Heart.vue')
+    },
+    {
       path: "/",
       redirect: "/login",
     },

@@ -49,24 +49,25 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-import { reactive } from 'vue';
+import axios from "axios";
+import { reactive } from "vue";
 
 const loginData = reactive({
-  email: '',
-  password: ''
-})
+  email: "",
+  password: "",
+});
 
-const login = async() => {
+const login = async () => {
   try {
-    const response = await axios.post('http://localhost:3000/user/login', loginData)
+    const response = await axios.post(
+      "http://localhost:3000/user/login",
+      loginData
+    );
     console.log(response.data);
-  }catch(e) {
+  } catch (e) {
     console.log(e);
   }
-}
-
-
+};
 </script>
 
 <style scoped>
@@ -82,7 +83,7 @@ const login = async() => {
 .vitalink {
   width: 100%;
   height: 300px;
-  max-width: 300px; 
+  max-width: 300px;
 }
 .input-field {
   appearance: none;
