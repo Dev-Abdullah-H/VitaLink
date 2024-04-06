@@ -22,9 +22,24 @@ const router = createRouter({
       meta: { requireAuth: true },
     },
     {
-      path: "/home/:id",
-      name: "section",
-      component: () => import('../views/Section.vue')
+      path: "/home/heart",
+      name: "heart",
+      component: () => import(`../views/Sections/Heart.vue`)
+    },
+    {
+      path: "/home/bmi",
+      name: "bmi",
+      component: () => import(`../views/Sections/Bmi.vue`)
+    },
+    {
+      path: "/home/blood",
+      name: "blood",
+      component: () => import(`../views/Sections/Blood.vue`)
+    },
+    {
+      path: "/home/urine",
+      name: "urine",
+      component: () => import(`../views/Sections/Urine.vue`)
     },
     {
       path: '/signup/user-info',

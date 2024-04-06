@@ -3,7 +3,7 @@
     class="chart-container bg-gray-100 rounded-lg shadow-md mx-auto mt-8 py-8 px-4 lg:px-0"
   >
     <h1 class="text-2xl lg:text-3xl font-thin text-center mb-6 text-gray-800">
-      Health Data Trends
+      Health Data Trends - Heart
     </h1>
     <canvas
       id="goodCanvas1"
@@ -25,7 +25,7 @@ onMounted(() => {
       labels: ["27 OCT", "29 OCT", "30 Sept", "25 April", "Purple", "Orange"],
       datasets: [
         {
-          label: "BMI",
+          label: "Heart Report",
           data: [20, 25, 22, 30, 35, 28],
           borderColor: "#5cb85c",
           backgroundColor: "rgba(92, 184, 92, 0.2)",

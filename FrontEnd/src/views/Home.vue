@@ -13,7 +13,7 @@
             <button class="btn btn-primary mt-2">View Details</button>
           </div>
         </div>
-        <div @click="redirect('urine-section')" class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
+        <div @click="redirect('urine')" class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg">
           <img src="../assets/bladder.png" alt="Urine Output" class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2" />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">Urine Output</h2>
