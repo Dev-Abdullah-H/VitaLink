@@ -20,12 +20,10 @@ mongoose
 
 // Api initialize
 const UserApi = require("./APIS/User");
-const UserInfoApi = require('./APIS/UserInfo')
+const UserInfoApi = require("./APIS/UserInfo");
 // Use Api
 app.use("/user", UserApi);
-app.use("/user-info", UserInfoApi)
-
-
+app.use("/user-info", UserInfoApi);
 
 // Listening
 const connectServer = () => {

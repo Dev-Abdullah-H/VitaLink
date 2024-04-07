@@ -6,7 +6,6 @@
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6"
       >
         <div
-          @click="redirect('heart')"
           class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg"
         >
           <img
@@ -19,11 +18,21 @@
             <p class="text-lg font-semibold text-blue-500 mb-4">
               <span class="text-4xl">80</span> BPM
             </p>
-            <button class="btn btn-primary mt-2">View Details</button>
+            <button
+              @click="redirectToChart('heart')"
+              class="btn btn-primary mt-2 mr-2"
+            >
+              View Details
+            </button>
+            <button
+              @click="redirectToDetail('heart')"
+              class="btn btn-primary mt-2"
+            >
+              New test
+            </button>
           </div>
         </div>
         <div
-          @click="redirect('urine')"
           class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg"
         >
           <img
@@ -41,10 +50,21 @@
               <button class="btn btn-gray">Moderate</button>
               <button class="btn btn-gray">Heavy</button>
             </div>
+            <button
+              @click="redirectToChart('urine')"
+              class="btn btn-primary mt-2 mr-2"
+            >
+              View Details
+            </button>
+            <button
+              @click="redirectToDetail('urine')"
+              class="btn btn-primary mt-2"
+            >
+              New test
+            </button>
           </div>
         </div>
         <div
-          @click="redirect('blood')"
           class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg"
         >
           <img
@@ -57,11 +77,21 @@
             <p class="text-lg font-semibold text-blue-500 mb-4">
               <span class="text-4xl">120</span> mg/dL
             </p>
-            <button class="btn btn-primary mt-2">View Details</button>
+            <button
+              @click="redirectToChart('blood')"
+              class="btn btn-primary mt-2 mr-2"
+            >
+              View Details
+            </button>
+            <button
+              @click="redirectToDetail('blood')"
+              class="btn btn-primary mt-2"
+            >
+              New test
+            </button>
           </div>
         </div>
         <div
-          @click="redirect('bmi')"
           class="data-section cursor-pointer rounded-lg shadow-md bg-gradient-to-b from-white to-gray-100 hover:shadow-lg"
         >
           <img
@@ -74,7 +104,18 @@
             <p class="text-lg font-semibold text-blue-500 mb-4">
               <span class="text-4xl">22.5</span> (Normal)
             </p>
-            <button class="btn btn-primary mt-2">View Details</button>
+            <button
+              @click="redirectToChart('bmi')"
+              class="btn btn-primary mt-2 mr-2"
+            >
+              View Details
+            </button>
+            <button
+              @click="redirectToDetail('bmi')"
+              class="btn btn-primary mt-2"
+            >
+              New test
+            </button>
           </div>
         </div>
       </div>
@@ -88,8 +129,12 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const redirect = (path) => {
+const redirectToChart = (path) => {
   router.push(`/home/${path}`);
+};
+
+const redirectToDetail = (path) => {
+  router.push(`/home/${path}-detail`);
 };
 </script>
 

@@ -1,13 +1,11 @@
 <template>
-<RouterView/>
+  <RouterView />
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Ojuju:wght@200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Ojuju:wght@200..800&display=swap");
 * {
   margin: 0;
   padding: 0;

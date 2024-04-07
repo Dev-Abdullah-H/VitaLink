@@ -75,7 +75,20 @@
 <script setup>
 import { reactive } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+let getEmail;
+if (localStorage.getItem("userEmail")) {
+  getEmail = localStorage.getItem("userEmail");
+} else {
+  router.push("/signup");
+  alert("Not loged in..");
+}
+
 const userData = reactive({
+  email: getEmail,
   name: "",
   dob: "",
   nationality: "",
@@ -84,9 +97,12 @@ const userData = reactive({
 
 const saveUserInfo = async () => {
   try {
-    const response = await axios.post('http://localhost:3000/user-info/saveinfo', userData)
+    const response = await axios.post(
+      "http://localhost:3000/user-info/saveinfo",
+      userData
+    );
     console.log(response.data);
-  }catch (e) {
+  } catch (e) {
     console.log(e);
   }
 };

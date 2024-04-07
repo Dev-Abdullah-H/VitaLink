@@ -15,7 +15,6 @@
             </label>
             <input
               v-model="userData.restingHeartRate"
-              type="number"
               id="restingHeartRate"
               class="input-field"
               placeholder="Enter your resting heart rate (bpm)"
@@ -27,22 +26,9 @@
             </label>
             <input
               v-model="userData.maxHeartRate"
-              type="number"
               id="maxHeartRate"
               class="input-field"
               placeholder="Enter your maximum heart rate (bpm)"
-            />
-          </div>
-          <div class="mb-6 flex flex-col items-start">
-            <label for="bloodPressure" class="text-gray-700 font-bold mb-2">
-              Blood Pressure (Systolic/Diastolic):
-            </label>
-            <input
-              v-model="userData.bloodPressure"
-              type="text"
-              id="bloodPressure"
-              class="input-field"
-              placeholder="Enter blood pressure (e.g., 120/80 mmHg)"
             />
           </div>
           <div class="flex justify-center">
@@ -59,7 +45,6 @@ import { ref } from "vue";
 const userData = ref({
   restingHeartRate: "",
   maxHeartRate: "",
-  bloodPressure: "",
 });
 
 const submitData = async (data) => {

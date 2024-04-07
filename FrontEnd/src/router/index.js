@@ -24,32 +24,32 @@ const router = createRouter({
     {
       path: "/home/heart",
       name: "heart",
-      component: () => import(`../views/Sections/Heart.vue`)
+      component: () => import(`../views/Sections/Heart.vue`),
     },
     {
       path: "/home/bmi",
       name: "bmi",
-      component: () => import(`../views/Sections/Bmi.vue`)
+      component: () => import(`../views/Sections/Bmi.vue`),
     },
     {
       path: "/home/blood",
       name: "blood",
-      component: () => import(`../views/Sections/Blood.vue`)
+      component: () => import(`../views/Sections/Blood.vue`),
     },
     {
       path: "/home/urine",
       name: "urine",
-      component: () => import(`../views/Sections/Urine.vue`)
+      component: () => import(`../views/Sections/Urine.vue`),
     },
     {
-      path: '/signup/user-info',
+      path: "/signup/user-info",
       name: "userinfo",
-      component: () => import('../views/UserInfo.vue')
+      component: () => import("../views/UserInfo.vue"),
     },
     {
-      path: '/home/heart-detail',
+      path: "/home/heart-detail",
       name: "heart-detail",
-      component: () => import('../views/Detail/Heart.vue')
+      component: () => import("../views/Detail/Heart.vue"),
     },
     {
       path: "/",

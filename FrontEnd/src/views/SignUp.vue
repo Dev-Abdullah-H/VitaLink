@@ -68,11 +68,11 @@ const SignUp = async () => {
     );
     console.log(response.data);
     if (response.data.success) {
-      SignUpData.email = "";
-      SignUpData.password = "";
+      localStorage.setItem("userEmail", response.data.user.email);
+      router.push("/signup/user-info");
     }
   } catch (e) {
-    console.log(e);
+    alert("Sign up failed!, try again please...");
   }
 };
 </script>
