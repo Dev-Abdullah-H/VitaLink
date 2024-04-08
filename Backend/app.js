@@ -21,10 +21,11 @@ mongoose
 // Api initialize
 const UserApi = require("./APIS/User");
 const UserInfoApi = require("./APIS/UserInfo");
+const TestApi = require("./APIS/Test");
 // Use Api
 app.use("/user", UserApi);
 app.use("/user-info", UserInfoApi);
-
+app.use("/test", TestApi);
 // Listening
 const connectServer = () => {
   app.listen(process.env.Port, () => {

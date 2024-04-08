@@ -16,17 +16,36 @@
 <script setup>
 import Chart from "chart.js/auto";
 import { onMounted } from "vue";
+import axios from "axios";
 
-onMounted(() => {
+let values = [];
+let dates = [];
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/test/get-test/heart"
+    );
+    values = response.data.values;
+    dates = response.data.dates;
+    values = values.map(Number);
+    console.log(response.data);
+    updateChart();
+  } catch (error) {
+    console.error("Error fetching heart rate data:", error);
+  }
+});
+
+const updateChart = () => {
   const ctx = document.getElementById("goodCanvas1");
   new Chart(ctx, {
     type: "line",
     data: {
-      labels: ["27 OCT", "29 OCT", "30 Sept", "25 April", "Purple", "Orange"],
+      labels: dates,
       datasets: [
         {
-          label: "Heart Report",
-          data: [20, 25, 22, 30, 35, 28],
+          label: "Heart (BPM)",
+          data: values,
           borderColor: "#5cb85c",
           backgroundColor: "rgba(92, 184, 92, 0.2)",
           borderWidth: 2,
@@ -42,11 +61,10 @@ onMounted(() => {
       scales: {
         y: {
           beginAtZero: false,
-          suggestedMin: 15,
-          suggestedMax: 40,
-
+          suggestedMin: 40,
+          suggestedMax: 60,
           ticks: {
-            stepSize: 5,
+            stepSize: 2,
           },
         },
         x: {
@@ -71,15 +89,16 @@ onMounted(() => {
       },
     },
   });
-});
+};
 </script>
+
 <style scoped>
 .chart-container {
   max-width: 700px;
-  background-color: #f5f5f5; /* Light background for better contrast */
+  background-color: #f5f5f5;
 }
 
 .chart {
-  width: 100%; /* Fills container width */
+  width: 100%;
 }
 </style>

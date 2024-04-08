@@ -14,25 +14,19 @@
               Resting Heart Rate:
             </label>
             <input
-              v-model="userData.restingHeartRate"
+              v-model="data.testVal"
               id="restingHeartRate"
               class="input-field"
               placeholder="Enter your resting heart rate (bpm)"
             />
           </div>
-          <div class="mb-6 flex flex-col items-start">
-            <label for="maxHeartRate" class="text-gray-700 font-bold mb-2">
-              Maximum Heart Rate:
-            </label>
-            <input
-              v-model="userData.maxHeartRate"
-              id="maxHeartRate"
-              class="input-field"
-              placeholder="Enter your maximum heart rate (bpm)"
-            />
-          </div>
           <div class="flex justify-center">
-            <button type="submit" class="btn md:w-full">Submit Data</button>
+            <button @click="$router.push('/home')" class="btn md:w-full mr-3">
+              Home Page
+            </button>
+            <button @click="submitTest" class="btn md:w-full">
+              Submit Data
+            </button>
           </div>
         </form>
       </div>
@@ -41,11 +35,30 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-const userData = ref({
-  restingHeartRate: "",
-  maxHeartRate: "",
+import { reactive } from "vue";
+import axios from "axios";
+let tDate = new Date();
+
+const data = reactive({
+  testVal: "",
+  date: `${tDate.getDate()}/${tDate.getMonth()}/${tDate.getFullYear()}`,
 });
+
+const submitTest = async () => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/test/create-test/heart",
+      data
+    );
+    if (response.data.success) {
+      data.testVal = "";
+      alert("Test Successfully Submit!");
+    }
+    console.log(response.data);
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const submitData = async (data) => {
   console.log("Heart health data:", data);
