@@ -11,12 +11,13 @@
           <img
             src="../assets/heart.png"
             alt="Heart Rate"
-            class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2"
+            class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 p-2"
+            :class="borderColor"
           />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">Heart Rate</h2>
             <p class="text-lg font-semibold text-blue-500 mb-4">
-              <span class="text-4xl">80</span> BPM
+              <span class="text-4xl">{{ heartData }}</span> BPM
             </p>
             <button
               @click="redirectToChart('heart')"
@@ -126,8 +127,32 @@
 <script setup>
 import Header from "@/components/Header.vue";
 import { useRouter } from "vue-router";
-
+import axios from "axios";
+import { ref, onMounted } from "vue";
 const router = useRouter();
+
+const heartData = ref("");
+
+let borderColor = ref("");
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/test/get-test/heart"
+    );
+    let values = response.data.values.map(Number);
+    heartData.value = values.pop();
+    if (heartData.value <= 45) {
+      borderColor.value = "yellow";
+    } else if (heartData.value >= 55) {
+      borderColor.value = "red";
+    } else {
+      borderColor.value = "green";
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 const redirectToChart = (path) => {
   router.push(`/home/${path}`);
@@ -165,5 +190,14 @@ const redirectToDetail = (path) => {
 
 .btn-gray:hover {
   background-color: #e5e5e5;
+}
+.yellow {
+  border-color: rgb(212, 212, 0);
+}
+.green {
+  border-color: green;
+}
+.red {
+  background-color: red;
 }
 </style>
