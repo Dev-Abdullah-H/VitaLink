@@ -142,12 +142,13 @@ let bloodBorderColor = ref("");
 let urineBorderColor = ref("");
 let bmiBorderColor = ref("");
 
-
+let getEmail = JSON.parse(localStorage.getItem("userData"));
 
 onMounted(async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:3000/test/get-test/heart"
+    const response = await axios.post(
+      "http://localhost:3000/test/get-test/heart",
+      { email: getEmail.email }
     );
     let values = response.data.values.map(Number);
     heartData.value = values.pop();
@@ -161,14 +162,14 @@ onMounted(async () => {
     if (!heartData.value) {
       heartData.value = "--";
     }
-    console.log(heartData.value);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
   // blood
   try {
-    const response = await axios.get(
-      "http://localhost:3000/test/get-test/blood"
+    const response = await axios.post(
+      "http://localhost:3000/test/get-test/blood",
+      { email: getEmail.email }
     );
     let values = response.data.values.map(Number);
     bloodData.value = values.pop();
@@ -182,14 +183,14 @@ onMounted(async () => {
     if (!bloodData.value) {
       bloodData.value = "--";
     }
-    console.log(bloodData.value);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
   // urine
   try {
-    const response = await axios.get(
-      "http://localhost:3000/test/get-test/urine"
+    const response = await axios.post(
+      "http://localhost:3000/test/get-test/urine",
+      { email: getEmail.email }
     );
     let values = response.data.values.map(Number);
     urineData.value = values.pop();
@@ -203,14 +204,14 @@ onMounted(async () => {
     if (!urineData.value) {
       urineData.value = "--";
     }
-    console.log(urineData.value);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
   // bmi
   try {
-    const response = await axios.get(
-      "http://localhost:3000/test/get-test/bmi"
+    const response = await axios.post(
+      "http://localhost:3000/test/get-test/bmi",
+      { email: getEmail.email }
     );
     let values = response.data.values.map(Number);
     bmiData.value = values.pop();
@@ -224,9 +225,8 @@ onMounted(async () => {
     if (!bmiData.value) {
       bmiData.value = "--";
     }
-    console.log(bmiData.value);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 });
 

@@ -3,9 +3,9 @@ const router = express.Router();
 const Test = require("../Models/Test");
 
 router.post("/create-test/:id", async (req, res) => {
-  const { testName, testVal, date } = req.body;
+  const { email, testName, testVal, date } = req.body;
   try {
-    const createTest = new Test({ testName, testVal, date });
+    const createTest = new Test({ email, testName, testVal, date });
     const saveTest = await createTest.save();
     res.json({ success: true, test: saveTest });
   } catch (e) {
@@ -13,10 +13,11 @@ router.post("/create-test/:id", async (req, res) => {
   }
 });
 
-router.get("/get-test/:id", async (req, res) => {
+router.post("/get-test/:id", async (req, res) => {
   const { id } = req.params;
+  const { email } = req.body;
   try {
-    const heartRates = await Test.find({ testName: id });
+    const heartRates = await Test.find({ email: email, testName: id });
     const values = heartRates.map((data) => data.testVal);
     const dates = heartRates.map((data) => data.date);
     res.json({ values, dates });

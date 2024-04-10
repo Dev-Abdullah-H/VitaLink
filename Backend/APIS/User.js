@@ -21,7 +21,7 @@ router.post("/login", async (req, res) => {
     if (login) {
       res.json({ success: true, login: login });
     } else {
-      res.json({ message: "No User found!" });
+      res.json({ login: false, message: "No User found!" });
     }
   } catch (e) {
     res.status(500).json({ success: false });

@@ -66,9 +66,11 @@ const SignUp = async () => {
       "http://localhost:3000/user/signup",
       SignUpData
     );
-    console.log(response.data);
     if (response.data.success) {
-      localStorage.setItem("userEmail", response.data.user.email);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ email: response.data.user.email })
+      );
       router.push("/signup/user-info");
     }
   } catch (e) {

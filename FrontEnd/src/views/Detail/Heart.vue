@@ -39,7 +39,10 @@ import { reactive } from "vue";
 import axios from "axios";
 let tDate = new Date();
 
+let getEmail = JSON.parse(localStorage.getItem("userData"));
+
 const data = reactive({
+  email: getEmail.email,
   testName: "heart",
   testVal: "",
   date: `${tDate.getDate()}/${tDate.getMonth()}/${tDate.getFullYear()}`,
@@ -55,14 +58,9 @@ const submitTest = async () => {
       data.testVal = "";
       alert("Test Successfully Submit!");
     }
-    console.log(response.data);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
-};
-
-const submitData = async (data) => {
-  console.log("Heart health data:", data);
 };
 </script>
 

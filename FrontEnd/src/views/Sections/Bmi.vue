@@ -21,10 +21,13 @@ import axios from "axios";
 let values = [];
 let dates = [];
 
+let getEmail = JSON.parse(localStorage.getItem("userData"));
+
 onMounted(async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:3000/test/get-test/bmi"
+    const response = await axios.post(
+      "http://localhost:3000/test/get-test/bmi",
+      { email: getEmail.email }
     );
     values = response.data.values;
     dates = response.data.dates;

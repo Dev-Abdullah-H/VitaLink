@@ -8,19 +8,20 @@
       </div>
       <nav class="hidden sm:flex space-x-4">
         <router-link
-          to="/"
+          to="/home"
           class="text-gray-200 hover:text-blue-500 transition duration-300 ease-in-out"
           >Home</router-link
         >
         <router-link
-          to="/"
+          to="/home"
           class="text-gray-200 hover:text-blue-500 transition duration-300 ease-in-out"
           >Tests</router-link
         >
         <router-link
           to="/"
+          @click="signOut"
           class="text-gray-200 hover:text-blue-500 transition duration-300 ease-in-out"
-          >Appointment</router-link
+          >Sign Out</router-link
         >
       </nav>
       <button
@@ -51,9 +52,13 @@
       <ul
         class="flex flex-col items-center justify-center py-8 space-y-4 text-white"
       >
-        <li><router-link to="/" class="text-xl">Home</router-link></li>
-        <li><router-link to="/" class="text-xl">Tests</router-link></li>
-        <li><router-link to="/" class="text-xl">Appointment</router-link></li>
+        <li><router-link to="/home" class="text-xl">Home</router-link></li>
+        <li><router-link to="/home" class="text-xl">Tests</router-link></li>
+        <li>
+          <router-link to="/" @click="signOut" class="text-xl"
+            >Sign Out</router-link
+          >
+        </li>
       </ul>
     </div>
   </div>
@@ -61,6 +66,14 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const signOut = () => {
+  localStorage.removeItem("userData");
+  router.push("/login");
+};
 
 const isMenuOpen = ref(false);
 const isHamburgerVisible = ref(false);

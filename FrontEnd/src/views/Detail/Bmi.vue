@@ -46,7 +46,10 @@ let bmiData = reactive({
   weight: "",
 });
 
+let getEmail = JSON.parse(localStorage.getItem("userData"));
+
 const data = reactive({
+  email: getEmail.email,
   testName: "bmi",
   testVal: "",
   date: `${tDate.getDate()}/${tDate.getMonth()}/${tDate.getFullYear()}`,
@@ -69,9 +72,8 @@ const submitTest = async () => {
       bmiData.weight = "";
       alert("Test Successfully Submit!");
     }
-    console.log(response.data);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 </script>

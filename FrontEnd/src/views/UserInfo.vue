@@ -80,15 +80,15 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 let getEmail;
-if (localStorage.getItem("userEmail")) {
-  getEmail = localStorage.getItem("userEmail");
+if (localStorage.getItem("userData")) {
+  getEmail = JSON.parse(localStorage.getItem("userData"));
 } else {
   router.push("/signup");
   alert("Not loged in..");
 }
 
 const userData = reactive({
-  email: getEmail,
+  email: getEmail.email,
   name: "",
   dob: "",
   nationality: "",
@@ -102,8 +102,13 @@ const saveUserInfo = async () => {
       userData
     );
     console.log(response.data);
+    if (response.data) {
+      router.push("/home");
+      alert("User information saved successfully!");
+      localStorage.setItem("userData", JSON.stringify(userData));
+    }
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 </script>

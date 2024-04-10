@@ -51,6 +51,9 @@
 <script setup>
 import axios from "axios";
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const loginData = reactive({
   email: "",
@@ -64,6 +67,15 @@ const login = async () => {
       loginData
     );
     console.log(response.data);
+    if (response.data.login) {
+      localStorage.setItem("userData", JSON.stringify(response.data.login));
+      router.push("/home");
+      alert("User logged in successfully");
+    } else {
+      alert("Invalid credentials.. Please try again!..");
+    }
+    loginData.email = "";
+    loginData.password = "";
   } catch (e) {
     console.log(e);
   }
