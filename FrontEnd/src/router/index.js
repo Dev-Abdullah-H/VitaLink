@@ -52,6 +52,21 @@ const router = createRouter({
       component: () => import("../views/Detail/Heart.vue"),
     },
     {
+      path: "/home/blood-detail",
+      name: "blood-detail",
+      component: () => import("../views/Detail/Blood.vue"),
+    },
+    {
+      path: "/home/urine-detail",
+      name: "urine-detail",
+      component: () => import("../views/Detail/Urine.vue"),
+    },
+    {
+      path: "/home/bmi-detail",
+      name: "bmi-detail",
+      component: () => import("../views/Detail/Bmi.vue"),
+    },
+    {
       path: "/",
       redirect: "/login",
     },

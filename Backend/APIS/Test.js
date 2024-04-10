@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Test = require("../Models/Test");
 
-router.post("/create-test/heart", async (req, res) => {
-  const { testVal, date } = req.body;
+router.post("/create-test/:id", async (req, res) => {
+  const { testName, testVal, date } = req.body;
   try {
-    const createTest = new Test({ testVal, date });
+    const createTest = new Test({ testName, testVal, date });
     const saveTest = await createTest.save();
     res.json({ success: true, test: saveTest });
   } catch (e) {
@@ -13,9 +13,10 @@ router.post("/create-test/heart", async (req, res) => {
   }
 });
 
-router.get("/get-test/heart", async (req, res) => {
+router.get("/get-test/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const heartRates = await Test.find();
+    const heartRates = await Test.find({ testName: id });
     const values = heartRates.map((data) => data.testVal);
     const dates = heartRates.map((data) => data.date);
     res.json({ values, dates });

@@ -5,19 +5,19 @@
     <div class="content-container">
       <i class="fas fa-heartbeat heart-icon"></i>
       <h1 class="text-3xl text-center font-thin mb-8">
-        Track Your Heart Health
+        Track Your Blood Sugar levels
       </h1>
       <div class="form-container">
         <form @submit.prevent="submitData">
           <div class="mb-6 flex flex-col items-start">
-            <label for="restingHeartRate" class="text-gray-700 font-bold mb-2">
-              Resting Heart Rate:
+            <label for="bloodSugarLevel" class="text-gray-700 font-bold mb-2">
+              Blood sugar level:
             </label>
             <input
               v-model="data.testVal"
-              id="restingHeartRate"
+              id="bloodSugarLevel"
               class="input-field"
-              placeholder="Enter your resting heart rate (bpm)"
+              placeholder="Enter your blood sugar level"
             />
           </div>
           <div class="flex justify-center">
@@ -40,7 +40,7 @@ import axios from "axios";
 let tDate = new Date();
 
 const data = reactive({
-  testName: "heart",
+  testName: "blood",
   testVal: "",
   date: `${tDate.getDate()}/${tDate.getMonth()}/${tDate.getFullYear()}`,
 });
@@ -48,7 +48,7 @@ const data = reactive({
 const submitTest = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/create-test/heart",
+      "http://localhost:3000/test/create-test/blood",
       data
     );
     if (response.data.success) {
@@ -62,7 +62,7 @@ const submitTest = async () => {
 };
 
 const submitData = async (data) => {
-  console.log("Heart health data:", data);
+  console.log("blood sugar data:", data);
 };
 </script>
 

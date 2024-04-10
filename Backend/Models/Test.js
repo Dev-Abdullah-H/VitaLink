@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const TestScehma = new mongoose.Schema({
+  testName: String,
   testVal: String,
   date: String,
 });

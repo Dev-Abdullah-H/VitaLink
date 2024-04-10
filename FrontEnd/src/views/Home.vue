@@ -12,7 +12,7 @@
             src="../assets/heart.png"
             alt="Heart Rate"
             class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 p-2"
-            :class="borderColor"
+            :class="heartBorderColor"
           />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">Heart Rate</h2>
@@ -39,18 +39,14 @@
           <img
             src="../assets/bladder.png"
             alt="Urine Output"
-            class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2"
+            class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 p-2"
+            :class="urineBorderColor"
           />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">Urine Output</h2>
             <p class="text-lg font-semibold text-blue-500 mb-4">
-              Log Today's Output
+              {{ urineData }} PH
             </p>
-            <div class="flex justify-center gap-4 mt-4">
-              <button class="btn btn-gray">Light</button>
-              <button class="btn btn-gray">Moderate</button>
-              <button class="btn btn-gray">Heavy</button>
-            </div>
             <button
               @click="redirectToChart('urine')"
               class="btn btn-primary mt-2 mr-2"
@@ -71,12 +67,13 @@
           <img
             src="../assets/blood.png"
             alt="Blood Sugar"
-            class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2"
+            class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 p-2"
+            :class="bloodBorderColor"
           />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">Blood Sugar</h2>
             <p class="text-lg font-semibold text-blue-500 mb-4">
-              <span class="text-4xl">120</span> mg/dL
+              <span class="text-4xl">{{ bloodData }}</span> mg/dL
             </p>
             <button
               @click="redirectToChart('blood')"
@@ -98,12 +95,13 @@
           <img
             src="../assets/bmi.png"
             alt="BMI"
-            class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 border-blue-500 p-2"
+            class="mx-auto mb-4 w-24 h-24 object-cover rounded-full border-4 p-2"
+            :class="bmiBorderColor"
           />
           <div class="text-center px-4 py-4">
             <h2 class="text-2xl font-bold text-gray-800">BMI</h2>
             <p class="text-lg font-semibold text-blue-500 mb-4">
-              <span class="text-4xl">22.5</span> (Normal)
+              <span class="text-4xl">{{ bmiData }}</span>
             </p>
             <button
               @click="redirectToChart('bmi')"
@@ -131,9 +129,20 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 const router = useRouter();
 
-const heartData = ref("");
+// test data
 
-let borderColor = ref("");
+let heartData = ref("");
+let bloodData = ref("");
+let urineData = ref("");
+let bmiData = ref("");
+
+// border colors
+let heartBorderColor = ref("");
+let bloodBorderColor = ref("");
+let urineBorderColor = ref("");
+let bmiBorderColor = ref("");
+
+
 
 onMounted(async () => {
   try {
@@ -143,12 +152,79 @@ onMounted(async () => {
     let values = response.data.values.map(Number);
     heartData.value = values.pop();
     if (heartData.value <= 45) {
-      borderColor.value = "yellow";
+      heartBorderColor.value = "yellow";
     } else if (heartData.value >= 55) {
-      borderColor.value = "red";
-    } else {
-      borderColor.value = "green";
+      heartBorderColor.value = "red";
+    } else if (heartData.value) {
+      heartBorderColor.value = "green";
     }
+    if (!heartData.value) {
+      heartData.value = "--";
+    }
+    console.log(heartData.value);
+  } catch (e) {
+    console.log(e);
+  }
+  // blood
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/test/get-test/blood"
+    );
+    let values = response.data.values.map(Number);
+    bloodData.value = values.pop();
+    if (bloodData.value <= 70) {
+      bloodBorderColor.value = "yellow";
+    } else if (bloodData.value >= 240) {
+      bloodBorderColor.value = "red";
+    } else if (bloodData.value) {
+      bloodBorderColor.value = "green";
+    }
+    if (!bloodData.value) {
+      bloodData.value = "--";
+    }
+    console.log(bloodData.value);
+  } catch (e) {
+    console.log(e);
+  }
+  // urine
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/test/get-test/urine"
+    );
+    let values = response.data.values.map(Number);
+    urineData.value = values.pop();
+    if (urineData.value < 7) {
+      urineBorderColor.value = "yellow";
+    } else if (urineData.value >= 7.5) {
+      urineBorderColor.value = "red";
+    } else if (urineData.value) {
+      urineBorderColor.value = "green";
+    }
+    if (!urineData.value) {
+      urineData.value = "--";
+    }
+    console.log(urineData.value);
+  } catch (e) {
+    console.log(e);
+  }
+  // bmi
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/test/get-test/bmi"
+    );
+    let values = response.data.values.map(Number);
+    bmiData.value = values.pop();
+    if (bmiData.value < 18.5) {
+      bmiBorderColor.value = "yellow";
+    } else if (bmiData.value >= 25) {
+      bmiBorderColor.value = "red";
+    } else if (bmiData.value) {
+      bmiBorderColor.value = "green";
+    }
+    if (!bmiData.value) {
+      bmiData.value = "--";
+    }
+    console.log(bmiData.value);
   } catch (e) {
     console.log(e);
   }

@@ -3,7 +3,7 @@
     class="chart-container bg-gray-100 rounded-lg shadow-md mx-auto mt-8 py-8 px-4 lg:px-0"
   >
     <h1 class="text-2xl lg:text-3xl font-thin text-center mb-6 text-gray-800">
-      Health Data Trends - Heart
+      Health Data Trends - Heart Report
     </h1>
     <canvas
       id="goodCanvas1"

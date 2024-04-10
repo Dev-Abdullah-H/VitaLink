@@ -3,7 +3,7 @@
     class="chart-container bg-gray-100 rounded-lg shadow-md mx-auto mt-8 py-8 px-4 lg:px-0"
   >
     <h1 class="text-2xl lg:text-3xl font-thin text-center mb-6 text-gray-800">
-      Health Data Trends - Bmi
+      Health Data Trends - Bmi Report
     </h1>
     <canvas
       id="goodCanvas1"
@@ -16,17 +16,36 @@
 <script setup>
 import Chart from "chart.js/auto";
 import { onMounted } from "vue";
+import axios from "axios";
 
-onMounted(() => {
+let values = [];
+let dates = [];
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/test/get-test/bmi"
+    );
+    values = response.data.values;
+    dates = response.data.dates;
+    values = values.map(Number);
+    console.log(response.data);
+    updateChart();
+  } catch (error) {
+    console.error("Error fetching Bmi data:", error);
+  }
+});
+
+const updateChart = () => {
   const ctx = document.getElementById("goodCanvas1");
   new Chart(ctx, {
     type: "line",
     data: {
-      labels: ["27 OCT", "29 OCT", "30 Sept", "25 April", "Purple", "Orange"],
+      labels: dates,
       datasets: [
         {
-          label: "BMI Report",
-          data: [20, 25, 22, 30, 35, 28],
+          label: "Bmi",
+          data: values,
           borderColor: "#5cb85c",
           backgroundColor: "rgba(92, 184, 92, 0.2)",
           borderWidth: 2,
@@ -43,8 +62,7 @@ onMounted(() => {
         y: {
           beginAtZero: false,
           suggestedMin: 15,
-          suggestedMax: 40,
-
+          suggestedMax: 35,
           ticks: {
             stepSize: 5,
           },
@@ -71,8 +89,9 @@ onMounted(() => {
       },
     },
   });
-});
+};
 </script>
+
 <style scoped>
 .chart-container {
   max-width: 700px;

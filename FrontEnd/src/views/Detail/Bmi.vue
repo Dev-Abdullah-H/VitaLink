@@ -4,24 +4,26 @@
   >
     <div class="content-container">
       <i class="fas fa-heartbeat heart-icon"></i>
-      <h1 class="text-3xl text-center font-thin mb-8">
-        Track Your Heart Health
-      </h1>
+      <h1 class="text-3xl text-center font-thin mb-8">Track Your Bmi</h1>
       <div class="form-container">
         <form @submit.prevent="submitData">
           <div class="mb-6 flex flex-col items-start">
-            <label for="restingHeartRate" class="text-gray-700 font-bold mb-2">
-              Resting Heart Rate:
-            </label>
+            <label for="bmi" class="text-gray-700 font-bold mb-2"> BMI: </label>
             <input
-              v-model="data.testVal"
-              id="restingHeartRate"
+              v-model="bmiData.height"
+              id="bmi"
+              class="input-field mb-4"
+              placeholder="Enter your Height (ft)"
+            />
+            <input
+              v-model="bmiData.weight"
+              id="bmi"
               class="input-field"
-              placeholder="Enter your resting heart rate (bpm)"
+              placeholder="Enter your Weight (pounds)"
             />
           </div>
           <div class="flex justify-center">
-            <button @click="$router.push('/home')" class="btn md:w-full mr-3">
+            <button @click="$router.push('/home')" class="btn md:w-full mr-2">
               Home Page
             </button>
             <button @click="submitTest" class="btn md:w-full">
@@ -39,30 +41,38 @@ import { reactive } from "vue";
 import axios from "axios";
 let tDate = new Date();
 
+let bmiData = reactive({
+  height: "",
+  weight: "",
+});
+
 const data = reactive({
-  testName: "heart",
+  testName: "bmi",
   testVal: "",
   date: `${tDate.getDate()}/${tDate.getMonth()}/${tDate.getFullYear()}`,
 });
 
 const submitTest = async () => {
+  const heightInMeters = bmiData.height * 0.3048;
+  const weightInKilograms = bmiData.weight * 0.453592;
+
+  // Calculate BMI
+  const bmi = weightInKilograms / (heightInMeters * heightInMeters);
+  data.testVal = bmi.toFixed(2);
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/create-test/heart",
+      "http://localhost:3000/test/create-test/bmi",
       data
     );
     if (response.data.success) {
-      data.testVal = "";
+      bmiData.height = "";
+      bmiData.weight = "";
       alert("Test Successfully Submit!");
     }
     console.log(response.data);
   } catch (e) {
     console.log(e);
   }
-};
-
-const submitData = async (data) => {
-  console.log("Heart health data:", data);
 };
 </script>
 
