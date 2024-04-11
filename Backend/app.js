@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const path = require("path");
+
 
 const app = express();
 app.use(express.json());
@@ -26,6 +28,16 @@ const TestApi = require("./APIS/Test");
 app.use("/user", UserApi);
 app.use("/user-info", UserInfoApi);
 app.use("/test", TestApi);
+
+
+
+// Dist
+app.use(express.static(path.join(__dirname, '../FrontEnd/dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../FrontEnd/dist/index.html'));
+});
+
+
 // Listening
 const connectServer = () => {
   app.listen(process.env.Port, () => {
