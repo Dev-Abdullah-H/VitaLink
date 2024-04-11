@@ -67,6 +67,11 @@ const router = createRouter({
       component: () => import("../views/Detail/Bmi.vue"),
     },
     {
+      path: "/home/tests",
+      name: "test",
+      component: () => import("../views/Tests.vue"),
+    },
+    {
       path: "/",
       redirect: "/login",
     },

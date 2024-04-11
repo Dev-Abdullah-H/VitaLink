@@ -32,7 +32,6 @@ onMounted(async () => {
     values = response.data.values;
     dates = response.data.dates;
     values = values.map(Number);
-    console.log(response.data);
     updateChart();
   } catch (error) {
     console.error("Error fetching urine pH rate data:", error);

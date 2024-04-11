@@ -27,4 +27,31 @@ router.post("/get-test/:id", async (req, res) => {
   }
 });
 
+router.post("/get-test-all", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const heartRates = await Test.find({ email: email, testName: "heart" });
+    const bloodTests = await Test.find({ email: email, testName: "blood" });
+    const urineTests = await Test.find({ email: email, testName: "urine" });
+    const bmiTests = await Test.find({ email: email, testName: "bmi" });
+    res.json({ heartRates, bloodTests, urineTests, bmiTests });
+  } catch (e) {
+    res.json({ success: false, error: e });
+  }
+});
+
+router.delete("/delete-test/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteTest = await Test.deleteOne({ _id: id });
+    res.json({
+      success: true,
+      message: "Test deleted successfully",
+      deletedTest: deleteTest,
+    });
+  } catch (e) {
+    res.json({ success: false, error: e });
+  }
+});
+
 module.exports = router;

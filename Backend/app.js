@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const path = require("path");
+// const path = require("path");
 
 
 const app = express();
@@ -32,10 +32,10 @@ app.use("/test", TestApi);
 
 
 // Dist
-app.use(express.static(path.join(__dirname, '../FrontEnd/dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../FrontEnd/dist/index.html'));
-});
+// app.use(express.static(path.join(__dirname, '../FrontEnd/dist')));
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../FrontEnd/dist/index.html'));
+// });
 
 
 // Listening
