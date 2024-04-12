@@ -66,7 +66,6 @@ const login = async () => {
       "http://localhost:3000/user/login",
       loginData
     );
-    console.log(response.data);
     if (response.data.login) {
       localStorage.setItem("userData", JSON.stringify(response.data.login));
       router.push("/home");
@@ -77,7 +76,7 @@ const login = async () => {
     loginData.email = "";
     loginData.password = "";
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 </script>
