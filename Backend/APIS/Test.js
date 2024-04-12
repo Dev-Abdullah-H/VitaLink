@@ -40,6 +40,20 @@ router.post("/get-test-all", async (req, res) => {
   }
 });
 
+router.put("/update-test/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updateTest = await Test.updateOne({ _id: id }, req.body);
+    res.json({
+      success: true,
+      message: "Test updated successfully",
+      updatedTest: updateTest,
+    });
+  }catch(e) {
+    res.json({ success: false, error: e });
+  }
+})
+
 router.delete("/delete-test/:id", async (req, res) => {
   const { id } = req.params;
   try {
