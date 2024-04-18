@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-container flex items-center justify-between px-4">
       <div class="logo">
-        <router-link to="/" class="text-xl font-bold text-white"
+        <router-link to="/home" class="text-xl font-bold text-white"
           >VitaLink</router-link
         >
       </div>
