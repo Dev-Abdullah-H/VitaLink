@@ -32,7 +32,7 @@ app.use("/test", TestApi);
 
 // Listening
 const connectServer = () => {
-  app.listen(3000, () => {
+  app.listen(process.env.PORT, () => {
     console.log(`Server is listening on port : 3000`);
   });
 };
