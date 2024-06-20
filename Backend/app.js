@@ -9,10 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("MongoDb Connected");
     connectServer();
@@ -32,7 +29,7 @@ app.use("/test", TestApi);
 
 // Listening
 const connectServer = () => {
-  app.listen(3000, () => {
+  app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is listening on port : 3000`);
   });
 };
