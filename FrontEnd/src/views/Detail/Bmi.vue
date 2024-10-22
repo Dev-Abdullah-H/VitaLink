@@ -64,7 +64,7 @@ const submitTest = async () => {
   data.testVal = bmi.toFixed(2);
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/create-test/bmi",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/create-test/bmi`,
       data
     );
     if (response.data.success) {

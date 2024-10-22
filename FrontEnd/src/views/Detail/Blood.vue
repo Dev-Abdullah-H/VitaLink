@@ -51,7 +51,7 @@ const data = reactive({
 const submitTest = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/create-test/blood",
+      `${import.meta.env.VITE_APP_BACKEND_URLL}/test/create-test/blood`,
       data
     );
     if (response.data.success) {

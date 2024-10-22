@@ -63,7 +63,7 @@ const SignUpData = reactive({
 const SignUp = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/user/signup",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/user/signup`,
       SignUpData
     );
     if (response.data.success) {

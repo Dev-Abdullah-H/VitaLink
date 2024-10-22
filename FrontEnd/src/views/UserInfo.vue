@@ -98,7 +98,7 @@ const userData = reactive({
 const saveUserInfo = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/user-info/saveinfo",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/user-info/saveinfo`,
       userData
     );
     console.log(response.data);

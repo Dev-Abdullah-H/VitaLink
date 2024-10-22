@@ -147,7 +147,7 @@ let getEmail = JSON.parse(localStorage.getItem("userData"));
 onMounted(async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/get-test/heart",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/get-test/heart`,
       { email: getEmail.email }
     );
     let values = response.data.values.map(Number);
@@ -168,7 +168,7 @@ onMounted(async () => {
   // blood
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/get-test/blood",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/get-test/blood`,
       { email: getEmail.email }
     );
     let values = response.data.values.map(Number);
@@ -189,7 +189,7 @@ onMounted(async () => {
   // urine
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/get-test/urine",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/get-test/urine`,
       { email: getEmail.email }
     );
     let values = response.data.values.map(Number);
@@ -210,7 +210,7 @@ onMounted(async () => {
   // bmi
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/get-test/bmi",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/get-test/bmi`,
       { email: getEmail.email }
     );
     let values = response.data.values.map(Number);

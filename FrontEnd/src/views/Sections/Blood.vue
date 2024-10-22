@@ -26,7 +26,7 @@ let getEmail = JSON.parse(localStorage.getItem("userData"));
 onMounted(async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/get-test/blood",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/get-test/blood`,
       { email: getEmail.email }
     );
     values = response.data.values;

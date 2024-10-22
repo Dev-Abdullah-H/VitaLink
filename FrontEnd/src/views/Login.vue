@@ -63,7 +63,7 @@ const loginData = reactive({
 const login = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/user/login",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/user/login`,
       loginData
     );
     if (response.data.login) {

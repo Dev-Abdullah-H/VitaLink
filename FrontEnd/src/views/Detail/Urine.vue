@@ -51,7 +51,7 @@ const data = reactive({
 const submitTest = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/create-test/urine",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/create-test/urine`,
       data
     );
     if (response.data.success) {

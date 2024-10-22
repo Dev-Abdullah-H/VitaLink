@@ -218,7 +218,7 @@ const updateTest = async (name, id) => {
 const updateTestResult = async () => {
   try {
     const response = await axios.put(
-      `http://localhost:3000/test/update-test/${updateResult._id}`,
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/update-test/${updateResult._id}`,
       updateResult
     );
     if (response.data) {
@@ -237,7 +237,7 @@ const updateTestResult = async () => {
 const deleteTest = async (id) => {
   try {
     const response = await axios.delete(
-      `http://localhost:3000/test/delete-test/${id}`
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/delete-test/${id}`
     );
     if (response.data) {
       alert("Test deleted successfully");
@@ -253,7 +253,7 @@ const deleteTest = async (id) => {
 const getAllTests = async () => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/test/get-test-all",
+      `${import.meta.env.VITE_APP_BACKEND_URL}/test/get-test-all`,
       { email: getEmail.email }
     );
     if (response.data) {

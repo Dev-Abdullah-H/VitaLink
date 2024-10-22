@@ -53,7 +53,9 @@
         class="flex flex-col items-center justify-center py-8 space-y-4 text-white"
       >
         <li><router-link to="/home" class="text-xl">Home</router-link></li>
-        <li><router-link to="/home/tests" class="text-xl">Tests</router-link></li>
+        <li>
+          <router-link to="/home/tests" class="text-xl">Tests</router-link>
+        </li>
         <li>
           <router-link to="/" @click="signOut" class="text-xl"
             >Sign Out</router-link
